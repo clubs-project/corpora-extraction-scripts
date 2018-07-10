@@ -2,7 +2,7 @@
 Requires Moses scripts: https://github.com/moses-smt/mosesdecoder/tree/master/scripts
 """
 import clean_original_corpus
-import fast_elim_dupl_multi
+import fast_elim_dupl_paste
 import os
 import argparse
 from time import time
@@ -68,7 +68,7 @@ class RunAll:
         return tc_path
 
     def elim_dupl(self, l1_path, l2_path):
-        eliminator = fast_elim_dupl_multi.FastElimDupl(l1_path, l2_path, self.threads)
+        eliminator = fast_elim_dupl_paste.FastElimDupl(l1_path, l2_path, self.threads)
         return eliminator.run()
 
     def tidy_up_folder(self, output_l1):
