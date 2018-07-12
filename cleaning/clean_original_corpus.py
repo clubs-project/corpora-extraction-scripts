@@ -33,11 +33,14 @@ class Cleaner:
                 match_list = regex.findall(pattern, line)  # get all occurrences of non-Latin characters
                 len_non_latin = self.get_length_of_tokens_in_list(match_list)
                 len_line = self.get_length_of_tokens_in_list(line.split())  # length of tokens in line, excluding whitespace
-                ratio = len_non_latin/len_line
-
-                # only delete line if more than half of its characters are non-Latin
-                if ratio > 0.5:
+                # we don't want empty lines
+                if len_line < 1:
                     self.non_latin.add(line_number)
+                else:
+                    ratio = len_non_latin/len_line
+                    # only delete line if more than half of its characters are non-Latin
+                    if ratio > 0.5:
+                       self.non_latin.add(line_number)
                 line_number += 1
 
     def make_new_file(self, path_to_language):
